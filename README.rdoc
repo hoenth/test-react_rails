@@ -1,26 +1,23 @@
 == Welcome to Rails
 
 within Gemfile
+  group :assets do
+    gem 'sass-rails',   '~> 3.2.3'
+    gem 'coffee-rails', '~> 3.2.1'
+    gem 'sprockets-coffee-react'
 
-# Gems used only for assets and not required
-# in production environments by default.
-    group :assets do
-      gem 'sass-rails',   '~> 3.2.3'
-      gem 'coffee-rails', '~> 3.2.1'
-      gem 'sprockets-coffee-react'
+    # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+    gem 'therubyracer', :platforms => :ruby
 
-      # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-      gem 'therubyracer', :platforms => :ruby
+    gem 'uglifier', '>= 1.0.3'
+  end
 
-      gem 'uglifier', '>= 1.0.3'
-    end
-
-    gem 'jquery-rails'
-    gem 'react-rails'
+  gem 'jquery-rails'
+  gem 'react-rails'
 
 In environment files
-    config.react.variant = :development (development.rb)
-    config.react.variant = :production (production.rb)
+  config.react.variant = :development (development.rb)
+  config.react.variant = :production (production.rb)
 
 In application.rb
   config.react.addons = true
@@ -37,4 +34,5 @@ to ensure it gets assigned in the scope of ‘window’
      render: ->
       <a href='javascript:void(0)' onClick=@props.onClickEvent> Click Me </a>
 
- rails g scaffold Meetup title:string description:text
+When you need to pass a function as a prop and include additional arguments to the function, use bind and put the function name in curly braces
+    <FormTextAreaWithLabel labelText="Description" id="description" placeholder="Meetup description" value=@state.description onChange={ @fieldChanged.bind(null, 'description') } />
