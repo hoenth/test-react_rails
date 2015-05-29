@@ -10,26 +10,5 @@
   <%= @meetup.description %>
 </p>
 
-<p>
-  <b>Bundle:</b>
-  <%= @meetup.bundle %>
-</p>
-
-<p>
-  <b>Exec:</b>
-  <%= @meetup.exec %>
-</p>
-
-<p>
-  <b>Rake:</b>
-  <%= @meetup.rake %>
-</p>
-
-<p>
-  <b>Db:</b>
-  <%= @meetup.db %>
-</p>
-
-
 <%= link_to 'Edit', edit_meetup_path(@meetup) %> |
 <%= link_to 'Back', meetups_path %>

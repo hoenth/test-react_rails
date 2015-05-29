@@ -1,13 +1,9 @@
 <h1>Listing meetups</h1>
 
-<table>
+<table class="table">
   <tr>
     <th>Title</th>
     <th>Description</th>
-    <th>Bundle</th>
-    <th>Exec</th>
-    <th>Rake</th>
-    <th>Db</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,10 +13,6 @@
   <tr>
     <td><%= meetup.title %></td>
     <td><%= meetup.description %></td>
-    <td><%= meetup.bundle %></td>
-    <td><%= meetup.exec %></td>
-    <td><%= meetup.rake %></td>
-    <td><%= meetup.db %></td>
     <td><%= link_to 'Show', meetup %></td>
     <td><%= link_to 'Edit', edit_meetup_path(meetup) %></td>
     <td><%= link_to 'Destroy', meetup, method: :delete, data: { confirm: 'Are you sure?' } %></td>
