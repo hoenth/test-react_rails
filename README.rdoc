@@ -35,4 +35,11 @@ to ensure it gets assigned in the scope of ‘window’
       <a href='javascript:void(0)' onClick=@props.onClickEvent> Click Me </a>
 
 When you need to pass a function as a prop and include additional arguments to the function, use bind and put the function name in curly braces
+
+  fieldChanged: (fieldName, event) ->
+    stateUpdate = {}
+    stateUpdate[fieldName] = event.target.value
+    @setState(stateUpdate)
+
+  render: ->
     <FormTextAreaWithLabel labelText="Description" id="description" placeholder="Meetup description" value=@state.description onChange={ @fieldChanged.bind(null, 'description') } />
