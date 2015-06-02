@@ -40,8 +40,7 @@ class MeetupsController < ApplicationController
   # POST /meetups
   # POST /meetups.json
   def create
-    @meetup = Meetup.new(params[:meetup])
-
+    @meetup = Meetup.new(meetup_params)
     respond_to do |format|
       if @meetup.save
         format.html { redirect_to @meetup, notice: 'Meetup was successfully created.' }
@@ -59,7 +58,7 @@ class MeetupsController < ApplicationController
     @meetup = Meetup.find(params[:id])
 
     respond_to do |format|
-      if @meetup.update_attributes(params[:meetup])
+      if @meetup.update_attributes(meetup_params)
         format.html { redirect_to @meetup, notice: 'Meetup was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,7 +71,7 @@ class MeetupsController < ApplicationController
   # DELETE /meetups/1
   # DELETE /meetups/1.json
   def destroy
-    @meetup = Meetup.find(params[:id])
+    @meetup = Meetup.find(meetup_params[:id])
     @meetup.destroy
 
     respond_to do |format|
@@ -80,4 +79,11 @@ class MeetupsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def meetup_params
+    params.require(:meetup).permit(:title, :description, :date, :seo)
+  end
+
 end
