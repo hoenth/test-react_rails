@@ -6,9 +6,9 @@
         title: ""
         description: ""
         date: new Date()
-        seo: null
+        seoText: null
+        guests: [""]
         errors: {
-          title: null
         }
       }
     }
@@ -35,7 +35,28 @@
     @setState(newState)
 
   seoChanged: (seoText) ->
-    @setState(seoText: seoText)
+    @state.meetup['seoText'] = seoText
+    @forceUpdate()
+
+  guestEmailChanged: (number, event) ->
+    guests = @state.meetup.guests
+    guests[number] = event.target.value
+    lastEmail = guests[guests.length-1]
+    penultimateEmail = guests[guests.length - 2]
+
+    if (lastEmail != "")
+      guests.push("")
+    if (guests.length >= 2 && lastEmail == "" && penultimateEmail == "")
+      guests.pop()
+    // state is supposed to be immutable. But since state has a depth greater than 1
+    // we would have to make a full copy of state, then use set state
+    // It seems like this could cause problems since setState queues all of the changes
+    // instead of acting on them at the time of the call
+    // so one could envision that makeing a copy of state then setting state
+    // could overwrite other changes to state
+    @state.meetup.guests = guests
+    @forceUpdate()
+
 
   monthName: (monthNumberStartingFromZero) ->
     ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][monthNumberStartingFromZero]
@@ -64,7 +85,7 @@
   validateForm: () ->
     isValid = true
     newState = $.extend(true, {}, @state)
-    for own fieldName, rule of @validationRules()
+    for own fieldName of @validationRules()
       error = @validateField(fieldName, @state.meetup[fieldName])
       console.log(error)
 
@@ -117,5 +138,20 @@
         <FormButtonWithOnClick
             onClick={ @formSubmitted }
         />
+      </fieldset>
+      <fieldset>
+        <legend>
+          Guests
+        </legend>
+          { for guest, n in @state.meetup.guests
+            <FormInputWithLabel
+                id="email"
+                key="guest-#{n}"
+                value={ guest }
+                onChange={ @guestEmailChanged.bind(null, n) }
+                placeholder="Email address of invitee"
+                labelText="Email"
+            />
+          }
       </fieldset>
     </form>

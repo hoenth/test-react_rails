@@ -23,7 +23,9 @@
     </div>
 
 ###
-//  Creates an input field with a label anda onchange event that is self publishing. Assumes an onChange event
+//  Creates an input field with a label anda onchange event that is self publishing.
+//  Includes buttons to clear the field or reset it
+//  Assumes an onChange event
 //  handler will be included in the props along with the following:
 //    value - The value of the field
 //    labelText - The text label to be display with the field
