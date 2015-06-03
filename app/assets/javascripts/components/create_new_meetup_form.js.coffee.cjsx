@@ -26,6 +26,7 @@
         description: @state.meetup.description
         date: "#{@state.meetup.date.getFullYear()}-#{@state.meetup.date.getMonth()+1}-#{@state.meetup.date.getDate()}"
         seo: @state.meetup.seo || @computeDefaultSeoText()
+        guests: @state.meetup.guests
       } })
 
   fieldChanged: (fieldName, event) ->
@@ -48,12 +49,14 @@
       guests.push("")
     if (guests.length >= 2 && lastEmail == "" && penultimateEmail == "")
       guests.pop()
+    ###
     // state is supposed to be immutable. But since state has a depth greater than 1
     // we would have to make a full copy of state, then use set state
     // It seems like this could cause problems since setState queues all of the changes
     // instead of acting on them at the time of the call
     // so one could envision that makeing a copy of state then setting state
     // could overwrite other changes to state
+    ###
     @state.meetup.guests = guests
     @forceUpdate()
 
@@ -143,6 +146,7 @@
         <legend>
           Guests
         </legend>
+          <FormSeparator>
           { for guest, n in @state.meetup.guests
             <FormInputWithLabel
                 id="email"
@@ -153,5 +157,6 @@
                 labelText="Email"
             />
           }
+          </FormSeparator>
       </fieldset>
     </form>

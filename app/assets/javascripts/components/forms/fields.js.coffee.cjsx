@@ -181,3 +181,26 @@
     <div className="control-label" htmlFor={ @props.id }>
       { @props.warning }
     </div>
+
+@FormSeparator = React.createClass
+  displayName: "FormSeparator"
+  getInitialState: ->
+    {
+
+    }
+  render: ->
+    children = []
+    for child, i in @props.children
+      children.push(child)
+      if i < @props.children.length - 1
+        children.push(
+          <div
+            key="separator-#{i}"
+            className="col-sm-offset-2 col-sm-10"
+          >
+            <hr className="form-input-separator"/>
+          </div>
+          )
+    <div>
+      { children }
+    </div>
