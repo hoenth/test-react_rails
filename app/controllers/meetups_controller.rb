@@ -25,7 +25,7 @@ class MeetupsController < ApplicationController
   # GET /meetups/new.json
   def new
     @meetup = Meetup.new
-
+    @technologies = Technology.all.to_a
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @meetup }
@@ -83,7 +83,7 @@ class MeetupsController < ApplicationController
   private
 
   def meetup_params
-    params.require(:meetup).permit(:title, :description, :date, :seo, guests: [])
+    params.require(:meetup).permit(:title, :description, :date, :technology_id, :seo, guests: [])
   end
 
 end

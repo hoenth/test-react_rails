@@ -1,4 +1,5 @@
 TestReactRails::Application.routes.draw do
+  resources :technologies
   resources :meetups
 
 

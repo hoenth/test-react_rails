@@ -11,16 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603015153) do
+ActiveRecord::Schema.define(version: 20150604010756) do
 
   create_table "meetups", force: :cascade do |t|
-    t.string   "title",       limit: 255
+    t.string   "title",         limit: 255
     t.text     "description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.date     "date",                    null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.date     "date",                      null: false
     t.string   "seo"
     t.text     "guests"
+    t.integer  "technology_id"
+  end
+
+  add_index "meetups", ["technology_id"], name: "index_meetups_on_technology_id"
+
+  create_table "technologies", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -42,4 +42,5 @@ When you need to pass a function as a prop and include additional arguments to t
     @setState(stateUpdate)
 
   render: ->
-    <FormTextAreaWithLabel labelText="Description" id="description" placeholder="Meetup description" value=@state.description onChange={ @fieldChanged.bind(null, 'description') } />
+    <FormTextAreaWithLabel labelText="Description" id="description" placeholder="Meetup description" value={ @state.description } onChange={ @fieldChanged.bind(null, 'description') } />
+

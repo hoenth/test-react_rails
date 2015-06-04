@@ -7,6 +7,7 @@
         description: ""
         date: new Date()
         seoText: null
+        technology_id: @props.technologies[0]["id"]
         guests: [""]
         errors: {
         }
@@ -26,6 +27,7 @@
         description: @state.meetup.description
         date: "#{@state.meetup.date.getFullYear()}-#{@state.meetup.date.getMonth()+1}-#{@state.meetup.date.getDate()}"
         seo: @state.meetup.seo || @computeDefaultSeoText()
+        technology_id: @state.meetup.technology_id
         guests: @state.meetup.guests
       } })
 
@@ -130,6 +132,14 @@
         <DateWithLabel
             date={ @state.meetup.date }
             onChange={ @dateChanged }
+        />
+        <FormSelectWithLabel
+          labelText="Technology"
+          id="technology_id"
+          collection={ @props.technologies }
+          valueField='id'
+          displayField='name'
+          onChange={ @fieldChanged.bind(null, 'technology_id') }
         />
         <FormInputWithLabelAndReset
             id="seo"

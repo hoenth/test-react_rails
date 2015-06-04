@@ -81,10 +81,16 @@
         { @props.labelText }
       </label>
       <div className="col-sm-10">
-        <textarea className="form-control" placeholder={ @props.placeholder } id={ @props.id } onChange={ @props.onChange } value={ @props.value } />
+        <textarea
+          className="form-control"
+          placeholder={ @props.placeholder }
+          id={ @props.id }
+          onChange={ @props.onChange }
+          value={ @props.value }
+        />
+
       </div>
     </div>
-
 
 @FormSubmitButton = React.createClass
   displayName: "FormSubmitButton"
@@ -203,4 +209,26 @@
           )
     <div>
       { children }
+    </div>
+
+@FormSelectWithLabel = React.createClass
+  displayName: "FormSelectWithLabel"
+  render: ->
+    <div className="form-group">
+      <label
+        htmlFor="technology"
+        className="col-sm-2 control-label"
+      >
+        { @props.labelText }
+      </label>
+      <div className="col-sm-10" >
+        <select
+          className="form-control"
+          onChange={ @props.onChange }
+          value={ @props.value }
+        >
+          <option />
+          { <option value={ item[@props.valueField] } key={ item[@props.valueField] }>{ item[@props.displayField] }</option> for item in @props.collection }
+        </select>
+      </div>
     </div>
